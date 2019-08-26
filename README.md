@@ -12,19 +12,26 @@ This page provides a way for users to enter in any form of text they prefer, and
 
 A small entry bar that is presented to a user, which allows them to enter individual words, which will be treated as a sentence comprised of one long string. For a single word entered in, that word will be analyzed to determine the following:
 
-- The program does nothing to non-alphabetical characters, since they do not contain consonants or vowels.
+The program does nothing to non-alphabetical characters, since they do not contain consonants or vowels.
 ** Input Example: "3"
 ** Output Example: "3"
 
-- The program adds "way" to single-letter words beginning with a vowel.
+The program adds "way" to single-letter words beginning with a vowel.
 
 ** Input Example: "i"
 ** Output Example: "iway"
 
-- The program adds "ay" to single-letter words beginning with a consonant.
+The program adds "ay" to single-letter words beginning with a consonant.
 
 ** Input Example: "bird"
 ** Output Example: "irdbay"
+
+If the input starts with "qu," both letters are moved to the end of the word entered, and "ay" are added on.
+
+** Input Example: "queue"
+** Output Example: "euequay"
+
+Once each word has had it's proper changes applied, each word is joined together as a single sentence, based on the order each word was entered.
 
 ## Known bugs
 

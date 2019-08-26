@@ -1,23 +1,36 @@
+var latin = function(data) {
+  var latinSentence = [];
+  data.forEach(function(word) {
+    word = word.split("");
+    var vowels = ["a", "e", "i", "o", "u"];
+    var latinWords = "";
+    for (i = 0; i < word.length; i++) {
+          vowels.forEach(function(vowel) {
+            if (word[i] === vowel) {
+              if (word[i] === "u" && word[i - 1] === "q") {
+                latinWords = word.splice((i + 1),word.length).join("") + word.splice(0,(i + 1)).join("").toUpperCase();
+                } else {
+                latinWords = word.splice(i, word.length).join("") + word.splice(0, i).join("").toUpperCase();
+                }
+                if (i === 0) {
+                  latinWords += "Way";
+                } else {
+                  latinWords += "ay";
+                }
+                latinSentence.push(latinWords)
+              }
+            })
+        }
+}); 
+  return latinSentence.join(" ");
+}
+
 $(document).ready(function() {
   $("form#pig-latin").submit(function(event) {
     event.preventDefault();
-
-    var vowels = ["a", "e", "i", "o", "u"];
-    var consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
-    var words = $("#words").val();
-    var splitWords = words.split('');
-    var latinWords = []
-
-    for (i = 0; i < vowels.length; i++) {
-      if (splitWords[0] === vowels[i])
-        splitWords = splitWords.join("") + "way";
-        i = vowels.length;
-    } 
-    for (i = 0; i < consonants.length; i++) {
-      if (splitWords[0] === consonants[i])
-        latinWords = splitWords.join("") + splitWords[0].slice() + "ay";
-        i = consonants.length;
-        console.log(latinWords);
-    }
-    });
-  });
+    var data = $("#words").val();
+    data = data.split(" ");
+    var sentence = latin(data);
+    $("#result").text(sentence).show()
+  })
+})
